@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Survey - Career Path Guide AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo" onclick="window.location.href='/'">
+                <i class="fas fa-brain"></i>
+                <span>Career<span class="highlight">AI</span></span>
+            </div>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="#" class="active">Survey</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="survey-section">
+        <div class="container">
+            <div class="survey-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                
+                <div class="survey-header">
+                    <h1>Discover Your Career Path</h1>
+                    <p>Answer comprehensive questions to get deeply personalized career recommendations</p>
+                    <div class="step-indicator">
+                        Step <span id="currentStep">1</span> of <span id="totalSteps">12</span>
+                    </div>
+                </div>
+
+                <form id="surveyForm">
+                    <!-- Step 1: Personal Information -->
+                    <div class="form-step active" data-step="1">
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h2>Let's Start With Your Details</h2>
+                            
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="age">Age *</label>
+                                    <input type="number" id="age" name="age" required min="15" max="50" placeholder="18">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="education_level">Education Level *</label>
+                                    <select id="education_level" name="education_level" required>
+                                        <option value="">Select...</option>
+                                        <option value="high_school">High School</option>
+                                        <option value="undergraduate">Undergraduate</option>
+                                        <option value="graduate">Graduate</option>
+                                        <option value="postgraduate">Postgraduate</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Favorite Subjects -->
+                    <div class="form-step" data-step="2">
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <h2>What Subjects Do You Enjoy Most?</h2>
+                            <p class="step-description">Select all that apply</p>
+                            
+                            <div class="checkbox-grid">
+                                <label class="checkbox-card">
+                                    <input type="checkbox" name="subjects" value="Mathematics">
+                                    <div class="card-content">
+                                        <i class="fas fa-calculator"></i>
+                                        <span>Mathematics</span>
+                                    </div>
+                                </label>
+                                
+                                <label class="checkbox-card">
+                                    <input type="checkbox" name="subjects" value="Science">
+                                    <div class="card-content">
+                                        <i class="fas fa-flask"></i>
+                                        <span>Science</span>
+                                    </div>
+                                </label>
+                                
+                                <label class="checkbox-card">
+                                    <input type="checkbox" name="subjects" value="Computer Science">
+                                    <div class="card-content">
+                                        <i class="fas fa-laptop-code"></i>
+                                        <span>Computer Science</span>
+                                    </div>
+                                </label>
+                                
+                                <label class="checkbox-card">
+                                    <input type="checkbox" name="subjects" value="Arts & Design">
+                                    <div class="card-content">
+                                        <i class="fas fa-palette"></i>
+                                        <span>Arts & Design</span>
+                                    </div>
+                                </label>
+                                
+                                <label class="checkbox-card">
+                                    <input type="checkbox" name="subjects" value="Business">
+                                    <div class="card-content">
+                                        <i class="fas fa-briefcase"></i>
+                                        <span>Business</span>
+                                    </div>
+                                </label>
+                                
+                                <label class="checkbox-card">
+                                    <input type="checkbox" name="subjects" value="Literature">
+                                    <div class="card-content">
+                                        <i class="fas fa-book-open"></i>
+                                        <span>Literature</span>
+                                    </div>
+                                </label>
+                                
+                                <label class="checkbox-card">
+                                    <input type="checkbox" name="subjects" value="Social Sciences">
+                                    <div class="card-content">
+                                        <i class="fas fa-users"></i>
+                                        <span>Social Sciences</span>
+                                    </div>
+                                </label>
+                                
+                                <label class="checkbox-card">
+                                    <input type="checkbox" name="subjects" value="Engineering">
+                                    <div class="card-content">
+                                        <i class="fas fa-cogs"></i>
+                                        <span>Engineering</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Field Preference -->
+                    <div class="form-step" data-step="3">
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-compass"></i>
+                            </div>
+                            <h2>Do You Prefer Technical or Creative Fields?</h2>
+                            
+                            <div class="radio-grid">
+                                <label class="radio-card">
+                                    <input type="radio" name="field_preference" value="Technical" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-laptop-code"></i>
+                                        <h3>Technical</h3>
+                                        <p>Logic, problem-solving, data analysis</p>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-card">
+                                    <input type="radio" name="field_preference" value="Creative" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-lightbulb"></i>
+                                        <h3>Creative</h3>
+                                        <p>Design, innovation, artistic expression</p>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-card">
+                                    <input type="radio" name="field_preference" value="Both" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-layer-group"></i>
+                                        <h3>Both</h3>
+                                        <p>Blend of technical and creative skills</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Work Type -->
+                    <div class="form-step" data-step="4">
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <h2>What Kind of Work Do You Like?</h2>
+                            
+                            <div class="radio-grid">
+                                <label class="radio-card">
+                                    <input type="radio" name="work_type" value="Working with data and analysis" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-chart-line"></i>
+                                        <h3>Data & Analysis</h3>
+                                        <p>Research, statistics, insights</p>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-card">
+                                    <input type="radio" name="work_type" value="Working with people and teams" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-users"></i>
+                                        <h3>People & Teams</h3>
+                                        <p>Collaboration, leadership, communication</p>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-card">
+                                    <input type="radio" name="work_type" value="Building and creating things" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-hammer"></i>
+                                        <h3>Building & Creating</h3>
+                                        <p>Development, design, innovation</p>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-card">
+                                    <input type="radio" name="work_type" value="Problem-solving and strategy" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-chess"></i>
+                                        <h3>Problem-Solving</h3>
+                                        <p>Strategy, critical thinking, optimization</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Priority -->
+                    <div class="form-step" data-step="5">
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
+                            <h2>What is More Important to You?</h2>
+                            
+                            <div class="radio-grid">
+                                <label class="radio-card">
+                                    <input type="radio" name="priority" value="High salary" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-dollar-sign"></i>
+                                        <h3>High Salary</h3>
+                                        <p>Financial growth and compensation</p>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-card">
+                                    <input type="radio" name="priority" value="Work-life balance" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-heart"></i>
+                                        <h3>Work-Life Balance</h3>
+                                        <p>Personal time and flexibility</p>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-card">
+                                    <input type="radio" name="priority" value="Both equally" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-equals"></i>
+                                        <h3>Both Equally</h3>
+                                        <p>Balance between salary and life quality</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 6: Learning Style -->
+                    <div class="form-step" data-step="6">
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-book-reader"></i>
+                            </div>
+                            <h2>How Do You Learn Best?</h2>
+                            <p class="step-description">Understanding your learning style helps us recommend better courses</p>
+                            
+                            <div class="radio-grid">
+                                <label class="radio-card">
+                                    <input type="radio" name="learning_style" value="Visual learner" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-eye"></i>
+                                        <h3>Visual Learner</h3>
+                                        <p>Videos, diagrams, and infographics</p>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-card">
+                                    <input type="radio" name="learning_style" value="Hands-on learner" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-hand-pointer"></i>
+                                        <h3>Hands-On Learner</h3>
+                                        <p>Projects, practice, and experimentation</p>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-card">
+                                    <input type="radio" name="learning_style" value="Reading/Writing" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-book"></i>
+                                        <h3>Reading/Writing</h3>
+                                        <p>Articles, documentation, and notes</p>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-card">
+                                    <input type="radio" name="learning_style" value="Interactive learner" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-users-cog"></i>
+                                        <h3>Interactive Learner</h3>
+                                        <p>Group discussions and mentorship</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 7: Experience Level -->
+                    <div class="form-step" data-step="7">
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-layer-group"></i>
+                            </div>
+                            <h2>What's Your Current Experience Level?</h2>
+                            
+                            <div class="radio-grid">
+                                <label class="radio-card">
+                                    <input type="radio" name="experience_level" value="Complete Beginner" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-seedling"></i>
+                                        <h3>Complete Beginner</h3>
+                                        <p>Just starting out, no prior knowledge</p>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-card">
+                                    <input type="radio" name="experience_level" value="Some Knowledge" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-book-open"></i>
+                                        <h3>Some Knowledge</h3>
+                                        <p>Learned basics through courses or school</p>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-card">
+                                    <input type="radio" name="experience_level" value="Intermediate" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-code"></i>
+                                        <h3>Intermediate</h3>
+                                        <p>Built projects, comfortable with concepts</p>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-card">
+                                    <input type="radio" name="experience_level" value="Advanced" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-trophy"></i>
+                                        <h3>Advanced</h3>
+                                        <p>Experienced with real-world applications</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 8: Time Commitment -->
+                    <div class="form-step" data-step="8">
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h2>How Much Time Can You Dedicate?</h2>
+                            <p class="step-description">Weekly time commitment for learning</p>
+                            
+                            <div class="radio-grid">
+                                <label class="radio-card">
+                                    <input type="radio" name="time_commitment" value="1-5 hours per week" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-hourglass-start"></i>
+                                        <h3>1-5 Hours/Week</h3>
+                                        <p>Light commitment, steady progress</p>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-card">
+                                    <input type="radio" name="time_commitment" value="6-15 hours per week" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-hourglass-half"></i>
+                                        <h3>6-15 Hours/Week</h3>
+                                        <p>Moderate pace, balanced approach</p>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-card">
+                                    <input type="radio" name="time_commitment" value="16-30 hours per week" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-hourglass-end"></i>
+                                        <h3>16-30 Hours/Week</h3>
+                                        <p>Serious commitment, fast learning</p>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-card">
+                                    <input type="radio" name="time_commitment" value="30+ hours per week" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-bolt"></i>
+                                        <h3>30+ Hours/Week</h3>
+                                        <p>Full-time dedication, rapid progress</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 9: Career Goals Timeline -->
+                    <div class="form-step" data-step="9">
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <h2>When Do You Want to Start Your Career?</h2>
+                            
+                            <div class="radio-grid">
+                                <label class="radio-card">
+                                    <input type="radio" name="career_timeline" value="Within 6 months" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-rocket"></i>
+                                        <h3>Within 6 Months</h3>
+                                        <p>Looking for quick entry</p>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-card">
+                                    <input type="radio" name="career_timeline" value="6 months to 1 year" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-running"></i>
+                                        <h3>6-12 Months</h3>
+                                        <p>Preparing for near-term transition</p>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-card">
+                                    <input type="radio" name="career_timeline" value="1-2 years" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-chart-line"></i>
+                                        <h3>1-2 Years</h3>
+                                        <p>Building foundation steadily</p>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-card">
+                                    <input type="radio" name="career_timeline" value="2+ years (still exploring)" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-compass"></i>
+                                        <h3>2+ Years</h3>
+                                        <p>Exploring options, long-term planning</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 10: Collaboration Preference -->
+                    <div class="form-step" data-step="10">
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <h2>Do You Prefer Working Alone or With Others?</h2>
+                            
+                            <div class="radio-grid">
+                                <label class="radio-card">
+                                    <input type="radio" name="collaboration_preference" value="Independently" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-user"></i>
+                                        <h3>Independently</h3>
+                                        <p>Focus, autonomy, self-directed work</p>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-card">
+                                    <input type="radio" name="collaboration_preference" value="Small teams" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-user-friends"></i>
+                                        <h3>Small Teams</h3>
+                                        <p>Close collaboration, tight-knit groups</p>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-card">
+                                    <input type="radio" name="collaboration_preference" value="Large teams" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-users"></i>
+                                        <h3>Large Teams</h3>
+                                        <p>Cross-functional, diverse perspectives</p>
+                                    </div>
+                                </label>
+                                
+                                <label class="radio-card">
+                                    <input type="radio" name="collaboration_preference" value="Mix of both" required>
+                                    <div class="card-content">
+                                        <i class="fas fa-random"></i>
+                                        <h3>Mix of Both</h3>
+                                        <p>Flexible, adaptable to situations</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 11: Work Environment -->
+                    <div class="form-step" data-step="11">
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <h2>What Work Environment Appeals to You?</h2>
+                            <p class="step-description">Select all that interest you</p>
+                            
+                            <div class="checkbox-grid">
+                                <label class="checkbox-card">
+                                    <input type="checkbox" name="work_environment" value="Startup Culture">
+                                    <div class="card-content">
+                                        <i class="fas fa-lightbulb"></i>
+                                        <span>Startup Culture</span>
+                                    </div>
+                                </label>
+                                
+                                <label class="checkbox-card">
+                                    <input type="checkbox" name="work_environment" value="Corporate">
+                                    <div class="card-content">
+                                        <i class="fas fa-city"></i>
+                                        <span>Corporate</span>
+                                    </div>
+                                </label>
+                                
+                                <label class="checkbox-card">
+                                    <input type="checkbox" name="work_environment" value="Remote Work">
+                                    <div class="card-content">
+                                        <i class="fas fa-home"></i>
+                                        <span>Remote Work</span>
+                                    </div>
+                                </label>
+                                
+                                <label class="checkbox-card">
+                                    <input type="checkbox" name="work_environment" value="Freelancing">
+                                    <div class="card-content">
+                                        <i class="fas fa-laptop"></i>
+                                        <span>Freelancing</span>
+                                    </div>
+                                </label>
+                                
+                                <label class="checkbox-card">
+                                    <input type="checkbox" name="work_environment" value="Tech Companies">
+                                    <div class="card-content">
+                                        <i class="fas fa-microchip"></i>
+                                        <span>Tech Companies</span>
+                                    </div>
+                                </label>
+                                
+                                <label class="checkbox-card">
+                                    <input type="checkbox" name="work_environment" value="Non-profit">
+                                    <div class="card-content">
+                                        <i class="fas fa-hands-helping"></i>
+                                        <span>Non-profit</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 12: Additional Information -->
+                    <div class="form-step" data-step="12">
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h2>Any Other Interests or Goals?</h2>
+                            <p class="step-description">Optional: Share anything else that might help us guide you better</p>
+                            
+                            <div class="form-group">
+                                <label for="other_interests">Additional Information</label>
+                                <textarea id="other_interests" name="other_interests" rows="5" 
+                                    placeholder="E.g., I'm interested in startups, I want to work remotely, I love helping people, I want to learn AI/ML, etc."></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="dream_companies">Dream Companies (Optional)</label>
+                                <input type="text" id="dream_companies" name="dream_companies" 
+                                    placeholder="E.g., Google, Microsoft, Amazon, Netflix, Tesla...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-secondary" id="prevBtn" onclick="changeStep(-1)">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </button>
+                        <button type="button" class="btn btn-primary" id="nextBtn" onclick="changeStep(1)">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button type="submit" class="btn btn-success" id="submitBtn" style="display: none;">
+                            Get My Career Path <i class="fas fa-rocket"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+                    <div class="loading-content">
+                        <div class="spinner"></div>
+                        <h3>Analyzing Your Responses...</h3>
+                        <p>Our AI is finding the perfect career matches for you</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Career Path Guide AI. Your future starts here.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/survey.js') }}"></script>
+</body>
+</html>
